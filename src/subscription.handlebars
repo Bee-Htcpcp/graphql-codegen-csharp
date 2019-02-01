@@ -3,7 +3,7 @@
  </summary> **/
 [Name("{{ name }}")]
 [Description(@"{{ description }}")]
-public abstract class {{ toResolver name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} 
+public abstract class {{ toResolver name }} 
 {
     {{#each fields}}
 
@@ -13,7 +13,7 @@ public abstract class {{ toResolver name }}{{#if hasInterfaces}} : {{#each inter
             </summary> **/
             [Name("{{ name }}")]
             [Description(@"{{ description }}")]
-            public abstract Task<{{ convertedType this }}> Get{{toPascalCase name }}Async(
+            public abstract Task<{{ convertedType this }}> {{toPascalCase name }}Async(
             {{#each arguments}}
                 [Name("{{ name }}")]
                 [Description(@"{{ description }}")]
@@ -26,7 +26,7 @@ public abstract class {{ toResolver name }}{{#if hasInterfaces}} : {{#each inter
             </summary> **/
             [Name("{{ name }}")]
             [Description(@"{{ description }}")]
-            public abstract {{ convertedType this }} {{toPascalCase name }}{ get; set;} 
+            public abstract Task<{{ convertedType this }}> {{toPascalCase name }}Async(); 
         {{/if}}
     {{/each}} 
 }

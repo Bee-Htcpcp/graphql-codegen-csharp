@@ -1,16 +1,20 @@
-{{ toComment description }}
+/**
+<summary>
+{{ description }}
+</summary>
+**/
 {{#if @root.config.enumsAsTypes }}
-public enum {{ name }} = {{#each values }}"{{ value }}"{{#unless @last}} | {{/unless}}{{/each}};
+// Code generation does not work here
+//[Name("{{ name }}")]
+//public enum {{ toPascalCase name }} = {{#each values }}"{{ toPascalCase value }}"{{#unless @last}} | {{/unless}}{{/each}};
 {{else}}
-public enum {{ name }} {
+[Name("{{ name }}")]
+[Description(@"{{ description }}")]
+public enum {{ toPascalCase name }} {
 {{#each values }}
-  {{value}}{{#unless @last}}, {{/unless}}
+    [Name("{{ value }}")]
+    [Description(@"{{ description }}")]
+    @{{ toPascalCase value}}{{#unless @last}}, {{/unless}}
 {{/each}}
-}
-public class {{ name }}EnumType : EnumerationGraphType<{{ name }}> {
-    public {{ name }}EnumType() {
-        Name = "{{ name }}EnumType";
-        Description = "{{ name }}";
-    }
 }
 {{/if}}

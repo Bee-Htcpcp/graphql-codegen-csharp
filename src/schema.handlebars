@@ -1,36 +1,43 @@
-{{#each scalars}}
+#region interfaces
 
-{{ toComment description }}
-public {{ name }} {{ name }} = new {{ name }}();
-{{/each}}
 {{#each interfaces}}
   {{~> interfaces }}
-
 {{/each}}
+
+#endregion interfaces
+
+#region types
+
 {{#each types}}
-  {{~> classes }}
-
+  {{#ifCond name "==" 'Query'}}
+    {{~> query }}
+  {{else}}
+    {{#ifCond name "==" 'Mutation'}}
+      {{~> mutation }}
+    {{else}}
+      {{#ifCond name "==" 'Subscription'}}
+          {{~> subscription }}
+      {{else}}
+          {{~> classes }}
+      {{/ifCond}}
+    {{/ifCond}}
+  {{/ifCond}}
 {{/each}}
+
+#endregion types
+
+#region inputTypes
+
 {{#each inputTypes}}
-  {{~> classes }}
+  {{~> input }}
+{{/each}}
 
-{{/each}}
-{{~#each types}}
-  {{~#each fields}}
-    {{~# if hasArguments }}
-public interface {{ toPascalCase name }}{{ toPascalCase ../name }}Args {
-{{#each arguments}}
-  public {{ convertedType this }} {{ name }}{{ getOptionals this }}; {{ toComment description }}
-{{/each}}
-}
-    {{/if}}
-  {{/each}}
-{{/each}}
+#endregion inputTypes
+
+#region enums
+
 {{#each enums}}
   {{~> enum }}
 {{/each}}
-{{#each unions}}
-{{ toComment description }}
-public class {{ name }} = {{#each possibleTypes}}{{this}}{{#unless @last}} | {{/unless}}{{/each}};
 
-{{/each}}
+#endregion enums

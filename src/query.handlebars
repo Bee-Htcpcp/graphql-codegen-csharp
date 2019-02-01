@@ -3,10 +3,9 @@
  </summary> **/
 [Name("{{ name }}")]
 [Description(@"{{ description }}")]
-public abstract class {{ toResolver name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} 
+public abstract class {{ toResolver name }}
 {
     {{#each fields}}
-
         {{#if hasArguments }}
             /** <summary>
              {{ description }}

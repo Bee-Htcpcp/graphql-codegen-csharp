@@ -1,6 +1,9 @@
 {{ toComment description }}
 public interface I{{ name }}{{#if hasInterfaces}} : {{#each interfaces}}{{this}}{{#unless @last}},{{/unless}}{{/each}}{{/if}} {
 {{#each fields}}
-  {{#if @root.config.immutableTypes }}readonly {{/if}}{{ convertedType this }} {{ name }}{{ getOptionals this }}{ get; set; } {{ toComment description }}
+  /// <summary>
+  /// {{ description }}
+  /// </summary>
+  {{ convertedType this }} {{ name }}{{ getOptionals this }}{ get;{{#unless @root.config.immutableTypes }}set; {{/unless}}  } 
 {{/each}}
 }

@@ -1,0 +1,16 @@
+/** <summary>
+ {{ description }}
+ </summary> **/
+[Name("{{ name }}")]
+[Description(@"{{ description }}")]
+public class {{  name }}
+{
+    {{#each fields}}
+        /** <summary>
+            {{ description }}
+        </summary> **/
+        [Name("{{ name }}")]
+        [Description(@"{{ description }}")]
+        public abstract {{ convertedType this }} {{toPascalCase name }}{ get; set;} 
+    {{/each}} 
+}
