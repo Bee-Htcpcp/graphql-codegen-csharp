@@ -41,7 +41,7 @@ export function getType(type, options) {
 
   if( type.isRequired)
   {
-    realType = `NotNull<${realType}>`;
+    realType = `NonNull<${realType}>`;
   }
 
   if (type.isArray) {
